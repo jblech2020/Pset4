@@ -163,23 +163,30 @@ public class ProblemSet4 {
         String visaTest = String.valueOf(cardNumber).substring(0, 1);
 
         //Luhn's algorithm
-        boolean luhnAlgorithm = false;
         int products = 0;
         for (int i = 1; i < lengthTest; i+=2){
-          String digit = String.valueOf(cardNumber).substring(i-1, i);
+          String digit = String.valueOf(cardNumber).substring(i, i+1);
           int multiplication = Integer.parseInt(digit) * 2;
-          for (int y = 1; y < String.valueOf(multiplication).length(); y++){
-            products += Integer.parseInt(String.valueOf(multiplication).substring(y-1, y));
-          }
+          int multiplicationLength = String.valueOf(multiplication).length();
+          
+                          for (int y = 1; y < multiplicationLength; y++){
+                            products += Integer.parseInt(String.valueOf(multiplication).substring(y-1, y));
+                          }
+
+          System.out.println("Products: " +products);
         }
-        int nonProducts = 0;
+        System.out.println("\nFinal Products: " +products);
+
+
+        int nonProducts = 0; //non-Products math is good
         for (int i = 0; i < lengthTest; i+=2){
           String digit = String.valueOf(cardNumber).substring(i, i+1);
           nonProducts += Integer.parseInt(digit);
         }
         int finalLuhnTest = nonProducts + products;
         String finalLuhnTestString = String.valueOf(finalLuhnTest);
-        luhnAlgorithm = (finalLuhnTestString.substring(finalLuhnTestString.length()-1, finalLuhnTestString.length()).equals("0"));
+        boolean luhnAlgorithm = (finalLuhnTestString.substring(finalLuhnTestString.length()-1, finalLuhnTestString.length()).equals("0"));
+        System.out.println("\nLuhn Algorithm Boolean: " +luhnAlgorithm);
 
         if (luhnAlgorithm){
           if (lengthTest == 15 && amTests.equals("34") || amTests.equals("37")){
