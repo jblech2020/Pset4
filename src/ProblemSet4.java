@@ -155,6 +155,7 @@ public class ProblemSet4 {
 
         //length test
         int lengthTest = String.valueOf(cardNumber).length();
+        // System.out.println("\nLength Test: " +lengthTest);
 
         //Amex, Mastercard tests
         String amTests = String.valueOf(cardNumber).substring(0, 2);
@@ -168,25 +169,21 @@ public class ProblemSet4 {
           String digit = String.valueOf(cardNumber).substring(i, i+1);
           int multiplication = Integer.parseInt(digit) * 2;
           int multiplicationLength = String.valueOf(multiplication).length();
-          
-                          for (int y = 1; y < multiplicationLength; y++){
-                            products += Integer.parseInt(String.valueOf(multiplication).substring(y-1, y));
-                          }
-
-          System.out.println("Products: " +products);
+          for (int y = 0; y < multiplicationLength; y++){
+            products += Integer.parseInt(String.valueOf(multiplication).substring(y, y+1));
+          }
         }
-        System.out.println("\nFinal Products: " +products);
-
-
         int nonProducts = 0; //non-Products math is good
+
         for (int i = 0; i < lengthTest; i+=2){
           String digit = String.valueOf(cardNumber).substring(i, i+1);
           nonProducts += Integer.parseInt(digit);
         }
         int finalLuhnTest = nonProducts + products;
+        // System.out.println("\nFinal Luhn Number: " +finalLuhnTest);
         String finalLuhnTestString = String.valueOf(finalLuhnTest);
         boolean luhnAlgorithm = (finalLuhnTestString.substring(finalLuhnTestString.length()-1, finalLuhnTestString.length()).equals("0"));
-        System.out.println("\nLuhn Algorithm Boolean: " +luhnAlgorithm);
+        // System.out.println("\nLuhn Algorithm Boolean: " +luhnAlgorithm);
 
         if (luhnAlgorithm){
           if (lengthTest == 15 && amTests.equals("34") || amTests.equals("37")){
@@ -199,5 +196,5 @@ public class ProblemSet4 {
         } else {
           System.out.println("\nInvalid.");
         }
+      }
     }
-}
