@@ -30,13 +30,13 @@ public class ProblemSet4 {
         // ps.sum();
         // ps.reverse();
         // ps.digits();
-        ps.average();
-        ps.prime();
-        ps.fibonacci();
-        ps.factors();
-        ps.mario();
-        ps.luigi();
-        // ps.credit();
+        // ps.average();
+        // ps.prime();
+        // ps.fibonacci();
+        // ps.factors();
+        // ps.mario();
+        // ps.luigi();
+        ps.credit();
 
         in.close();
     }
@@ -141,7 +141,26 @@ public class ProblemSet4 {
      */
 
     public void average() {
+      double average = 0;
+      double averageInput = 0;
+      double count = 0;
+      double offset = 0;
 
+      while (averageInput >= 0) {
+          System.out.print("Non-negative integer: ");
+          averageInput = in.nextDouble();
+          in.nextLine();
+          average += averageInput;
+          count += 1;
+          offset = (averageInput < 0) ? averageInput : 0;
+      }
+
+      average -= offset;
+      count -= 1;
+
+      average /= count;
+
+      System.out.printf("\n%,.2f.\n", average);
     }
 
     /*
@@ -152,7 +171,6 @@ public class ProblemSet4 {
 
     public void prime() {
       int primeInt = -1;
-      System.out.print("\n");
       while (primeInt < 0 || primeInt > (Math.pow(2, 31)-1)){
         System.out.print("Non-negative integer: ");
         primeInt = in.nextInt();
@@ -168,9 +186,9 @@ public class ProblemSet4 {
       }
 
       if (primeInt == 1 || primeInt == 0 || isPrime == false){
-        System.out.println("\nNot prime.\n");
+        System.out.println("\nNot prime.");
       } else if (isPrime == true){
-        System.out.println("\nPrime.\n");
+        System.out.println("\nPrime.");
       }
 
     }
@@ -200,7 +218,7 @@ public class ProblemSet4 {
          base2 = fibonacci;
        }
 
-       System.out.println("\n" + base2 + ".");
+       System.out.println("\n" + base2 + ".\n");
     }
 
     /*
@@ -210,14 +228,24 @@ public class ProblemSet4 {
      */
 
     public void factors() {
-      int factorInt = 0;
-      while (factorInt < 1 || factorInt > (Math.pow(2, 31)-1)){
-        System.out.print("Positive integer: ");
-        factorInt = in.nextInt();
+      int integerToFactor = 0;
+      String factorsOutput = "";
+
+      while (integerToFactor <= 0) {
+          System.out.print("Positive integer: ");
+          integerToFactor = in.nextInt();
+          in.nextLine();
       }
 
+      for (int i = 1; i <= Math.sqrt(integerToFactor); i++) {
+          if (integerToFactor % i == 0) {
+              factorsOutput += i + ", ";
+              factorsOutput += integerToFactor / i + ", ";
+          }
+      }
 
-
+      factorsOutput = factorsOutput.substring(0, factorsOutput.length() - 2) + ".";
+      System.out.println("\n" + factorsOutput);
     }
 
     /*
@@ -228,7 +256,33 @@ public class ProblemSet4 {
      */
 
     public void mario() {
+      int marioHeight = 0;
+      int numberOfBlocks = 0;
+      int maxBlocks = 0;
+      int numberOfSpaces = 0;
+      System.out.print("\n");
 
+      while (marioHeight <= 0 || marioHeight > 24) {
+          System.out.print("Height: ");
+          marioHeight = in.nextInt();
+          in.nextLine();
+          maxBlocks = marioHeight + 1;
+      }
+
+      System.out.print("\n");
+      for (int i = 1; i < maxBlocks; i++) {
+          numberOfBlocks = i + 1;
+          numberOfSpaces = maxBlocks - numberOfBlocks;
+          for (int j = 0; j < numberOfSpaces; j++) {
+              System.out.print(" ");
+          }
+          for (int j = 0; j < numberOfBlocks; j++) {
+              System.out.print("#");
+          }
+          System.out.print("\n");
+
+      }
+      System.out.print("\n");
     }
 
     /*
@@ -239,7 +293,37 @@ public class ProblemSet4 {
      */
 
     public void luigi() {
+      int luigiHeight = 0;
+      int numberOfBlocksLuigi = 0;
+      int maxBlocksLuigi = 0;
+      int numberOfSpacesLuigi = 0;
 
+      while (luigiHeight <= 0 || luigiHeight > 24) {
+         System.out.print("Height: ");
+         luigiHeight = in.nextInt();
+         in.nextLine();
+         maxBlocksLuigi = luigiHeight + 1;
+      }
+
+      System.out.print("\n");
+      for (int i = 1; i < maxBlocksLuigi; i++) {
+         numberOfBlocksLuigi = i + 1;
+         numberOfSpacesLuigi = maxBlocksLuigi - numberOfBlocksLuigi;
+         for (int j = 0; j < numberOfSpacesLuigi; j++) {
+             System.out.print(" ");
+         }
+         for (int j = 0; j < numberOfBlocksLuigi; j++) {
+             System.out.print("#");
+         }
+         System.out.print(" ");
+         for (int j = 0; j < numberOfBlocksLuigi; j++) {
+             System.out.print("#");
+         }
+         for (int j = 0; j < numberOfSpacesLuigi; j++) {
+             System.out.print(" ");
+         }
+         System.out.print("\n");
+      }
     }
 
     /* KINDA WORKS????
