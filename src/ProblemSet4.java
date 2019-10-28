@@ -27,15 +27,15 @@ public class ProblemSet4 {
 
         // comment out or uncomment as needed
 
-        // ps.sum();
-        // ps.reverse();
-        // ps.digits();
-        // ps.average();
-        // ps.prime();
-        // ps.fibonacci();
-        // ps.factors();
-        // ps.mario();
-        // ps.luigi();
+        ps.sum();
+        ps.reverse();
+        ps.digits();
+        ps.average();
+        ps.prime();
+        ps.fibonacci();
+        ps.factors();
+        ps.mario();
+        ps.luigi();
         ps.credit();
 
         in.close();
@@ -146,6 +146,9 @@ public class ProblemSet4 {
       double count = 0;
       double offset = 0;
 
+      //makes a new line
+      System.out.println("");
+
       while (averageInput >= 0) {
           System.out.print("Non-negative integer: ");
           averageInput = in.nextDouble();
@@ -170,6 +173,8 @@ public class ProblemSet4 {
      */
 
     public void prime() {
+      //makes a new line
+      System.out.println("");
       int primeInt = -1;
       while (primeInt < 0 || primeInt > (Math.pow(2, 31)-1)){
         System.out.print("Non-negative integer: ");
@@ -335,22 +340,20 @@ public class ProblemSet4 {
 
     public void credit() {
         System.out.print("\nNumber: ");
-        long cardNumber = in.nextLong();
+        String cardNumber = in.nextLine();
 
         //length test
-        int lengthTest = String.valueOf(cardNumber).length();
-        // System.out.println("\nLength Test: " +lengthTest);
-
-        //Amex, Mastercard tests
-        String amTests = String.valueOf(cardNumber).substring(0, 2);
-
-        //Visa tests
-        String visaTest = String.valueOf(cardNumber).substring(0, 1);
+        int lengthTest = cardNumber.length();
+        //Card Type Tests
+        String d = cardNumber.substring(0, 2);
+        boolean amTests = d.equals("34") || d.equals("37");
+        boolean masterTests = d.equals("51") || d.equals("52") || d.equals("53") || d.equals("54") || d.equals("55");
+        boolean visaTest = cardNumber.substring(0, 1).equals("4");
 
         //Luhn's algorithm
         int products = 0;
         for (int i = 1; i < lengthTest; i+=2){
-          String digit = String.valueOf(cardNumber).substring(i, i+1);
+          String digit = cardNumber.substring(i, i+1);
           int multiplication = Integer.parseInt(digit) * 2;
           int multiplicationLength = String.valueOf(multiplication).length();
           for (int y = 0; y < multiplicationLength; y++){
@@ -360,25 +363,25 @@ public class ProblemSet4 {
         int nonProducts = 0; //non-Products math is good
 
         for (int i = 0; i < lengthTest; i+=2){
-          String digit = String.valueOf(cardNumber).substring(i, i+1);
+          String digit = cardNumber.substring(i, i+1);
           nonProducts += Integer.parseInt(digit);
         }
+
         int finalLuhnTest = nonProducts + products;
-        // System.out.println("\nFinal Luhn Number: " +finalLuhnTest);
         String finalLuhnTestString = String.valueOf(finalLuhnTest);
         boolean luhnAlgorithm = (finalLuhnTestString.substring(finalLuhnTestString.length()-1, finalLuhnTestString.length()).equals("0"));
-        // System.out.println("\nLuhn Algorithm Boolean: " +luhnAlgorithm);
 
         if (luhnAlgorithm){
-          if (lengthTest == 15 && amTests.equals("34") || amTests.equals("37")){
+          if (lengthTest == 15 && amTests){
             System.out.println("\nAmex.");
-          } else if (lengthTest == 16 && amTests.equals("51") || amTests.equals("52") || amTests.equals("53") || amTests.equals("54") || amTests.equals("55")){
+          } else if (lengthTest == 16 && masterTests){
             System.out.println("\nMastercard.");
-          } else if (visaTest.equals("4") && lengthTest == 16 || lengthTest == 13){
+          } else if (visaTest && (lengthTest == 16 || lengthTest == 13)){
             System.out.println("\nVisa.");
           }
         } else {
           System.out.println("\nInvalid.");
         }
+        System.out.println("");
       }
     }
