@@ -27,16 +27,16 @@ public class ProblemSet4 {
 
         // comment out or uncomment as needed
 
-        ps.sum();
-        ps.reverse();
-        ps.digits();
+        // ps.sum();
+        // ps.reverse();
+        // ps.digits();
         ps.average();
         ps.prime();
         ps.fibonacci();
         ps.factors();
         ps.mario();
         ps.luigi();
-        ps.credit();
+        // ps.credit();
 
         in.close();
     }
@@ -52,7 +52,25 @@ public class ProblemSet4 {
      */
 
     public void sum() {
+      int lowerBound = 1;
+      int upperBound = 0;
+      int integerSum = 0;
 
+      System.out.println("");
+      do {
+        System.out.print("Lower bound: ");
+        lowerBound = in.nextInt();
+        System.out.print("Upper bound: ");
+        upperBound = in.nextInt();
+      } while (lowerBound > upperBound);
+
+      for (int i = lowerBound; i <= upperBound; i++) {
+        if (i % 2 == 0) {
+          integerSum += i;
+        }
+      }
+
+      System.out.printf("\n%,d.\n", integerSum);
     }
 
     /*
@@ -63,7 +81,26 @@ public class ProblemSet4 {
      */
 
     public void reverse() {
+      int forwardPositiveIntegerInput;
+      System.out.println("");
+      do {
+        System.out.print("Positive integer: ");
+        forwardPositiveIntegerInput = in.nextInt();
+      } while (forwardPositiveIntegerInput <= 0);
+      String forwardPositiveInteger = String.valueOf(forwardPositiveIntegerInput);
+      String reversePositiveInteger = "";
+      String digitToAdd = "";
 
+      for (int i = forwardPositiveInteger.length(); i > 0; i--) {
+        if(i != forwardPositiveInteger.length()) {
+          reversePositiveInteger = reversePositiveInteger + ", ";
+        }
+        digitToAdd = forwardPositiveInteger.substring(i - 1, i);
+        reversePositiveInteger = reversePositiveInteger + digitToAdd;
+      }
+      reversePositiveInteger = reversePositiveInteger + ".";
+
+      System.out.println("\n" + reversePositiveInteger);
     }
 
     /*
@@ -74,7 +111,25 @@ public class ProblemSet4 {
      */
 
     public void digits() {
+      int oddDigitInteger;
+      int oddDigitSum = 0;
 
+      System.out.println("");
+      do {
+        System.out.print("Positive integer: ");
+        oddDigitInteger = in.nextInt();
+      } while (oddDigitInteger <= 0);
+      String oddDigitString = String.valueOf(oddDigitInteger);
+      int integerToAdd;
+
+      for (int i = oddDigitString.length(); i > 0; i--) {
+        integerToAdd = Integer.parseInt(oddDigitString.substring(i - 1, i));
+        if(integerToAdd % 2 == 1) {
+          oddDigitSum += integerToAdd;
+        }
+      }
+
+      System.out.println("\n" + oddDigitSum + ".");
     }
 
     /*
@@ -96,6 +151,27 @@ public class ProblemSet4 {
      */
 
     public void prime() {
+      int primeInt = -1;
+      System.out.print("\n");
+      while (primeInt < 0 || primeInt > (Math.pow(2, 31)-1)){
+        System.out.print("Non-negative integer: ");
+        primeInt = in.nextInt();
+      }
+      boolean isPrime = true;
+
+      int halfPrime = primeInt / 2;
+      for (int i=2;i<=halfPrime;i++){
+        if (primeInt % i == 0){
+          isPrime = false;
+          break;
+        }
+      }
+
+      if (primeInt == 1 || primeInt == 0 || isPrime == false){
+        System.out.println("\nNot prime.\n");
+      } else if (isPrime == true){
+        System.out.println("\nPrime.\n");
+      }
 
     }
 
@@ -107,7 +183,24 @@ public class ProblemSet4 {
      */
 
     public void fibonacci() {
+      int n = 0;
+       System.out.println("");
+       while (n <= 0 || n > 92) {
+         System.out.print("Positive integer: ");
+         n = in.nextInt();
+       }
 
+       long base1 = 0;
+       long base2 = 1;
+       long fibonacci = 0;
+
+       for (int i = 2; i <= n; i++) {
+         fibonacci = base1 + base2;
+         base1 = base2;
+         base2 = fibonacci;
+       }
+
+       System.out.println("\n" + base2 + ".");
     }
 
     /*
@@ -117,6 +210,13 @@ public class ProblemSet4 {
      */
 
     public void factors() {
+      int factorInt = 0;
+      while (factorInt < 1 || factorInt > (Math.pow(2, 31)-1)){
+        System.out.print("Positive integer: ");
+        factorInt = in.nextInt();
+      }
+
+
 
     }
 
@@ -142,7 +242,7 @@ public class ProblemSet4 {
 
     }
 
-    /*
+    /* KINDA WORKS????
      * Exercise 10.
      *
      * Prompt the user to enter a credit card number (not a real one!). According to
